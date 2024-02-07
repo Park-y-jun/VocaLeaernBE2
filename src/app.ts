@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import * as dotenv from 'dotenv'
 
 import connect from './database/connect' 
+import { errorHandler } from './utils/errors/errorHandler'
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ class App {
     
     //세팅 라우트
     //세팅 에러핸들러
+    this.configureErrorHandling();
   }
 
   private configureMiddleware() {
@@ -40,7 +42,9 @@ class App {
 
   private configureRouter() {}
 
-  private configureErrorHandling() {}
+  private configureErrorHandling() {
+    this.app.use(errorHandler);
+  }
 
   private connectDB(url: string) {
     connect(url)

@@ -23,16 +23,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const schema = new mongoose_1.Schema({
+    listName: {
+        type: mongoose_1.Schema.Types.String,
+        maxlength: 100,
+        unique: true,
+    },
     userName: {
         type: mongoose_1.Schema.Types.String,
         maxlength: 50,
         unique: true,
     },
-    password: {
-        type: mongoose_1.Schema.Types.String,
-    },
 }, { timestamps: true });
-exports.UserModel = mongoose_1.default.model('User', schema);
+exports.default = mongoose_1.default.model("List", schema);

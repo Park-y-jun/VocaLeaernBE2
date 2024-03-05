@@ -1,11 +1,12 @@
 import mongoose, { model, Schema, Types } from "mongoose"
 
-interface User {
-  _id: Types.ObjectId;
+export interface User {
+  _id?: Types.ObjectId;
   userName: string;
   password: string;
   createdAt?: Date;
   updatedAt?: Date;
+  accessToken?: string;
 }
 
 const schema = new Schema<User>(
@@ -22,4 +23,4 @@ const schema = new Schema<User>(
   { timestamps: true }
 );
 
-export default mongoose.model<User>('User', schema);
+export const UserModel = mongoose.model<User>('User', schema);

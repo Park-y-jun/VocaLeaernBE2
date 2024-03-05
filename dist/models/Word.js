@@ -23,16 +23,33 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
+var Difficulty;
+(function (Difficulty) {
+    Difficulty["INITIAL"] = "INITIAL";
+    Difficulty["EASY"] = "EASY";
+    Difficulty["NORMAL"] = "NORMAL";
+    Difficulty["HARD"] = "HARD";
+})(Difficulty || (Difficulty = {}));
 const schema = new mongoose_1.Schema({
-    userName: {
+    listName: {
         type: mongoose_1.Schema.Types.String,
-        maxlength: 50,
+        maxlength: 100,
         unique: true,
     },
-    password: {
+    question: {
         type: mongoose_1.Schema.Types.String,
     },
+    answer: {
+        type: mongoose_1.Schema.Types.String,
+    },
+    difficulty: {
+        type: mongoose_1.Schema.Types.String,
+        enum: Object.values(Difficulty),
+        default: Difficulty.INITIAL,
+    },
+    nextReviewDate: {
+        type: mongoose_1.Schema.Types.Date,
+    },
 }, { timestamps: true });
-exports.UserModel = mongoose_1.default.model('User', schema);
+exports.default = mongoose_1.default.model("Word", schema);

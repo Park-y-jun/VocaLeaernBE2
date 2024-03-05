@@ -30,6 +30,8 @@ const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const dotenv = __importStar(require("dotenv"));
 const connect_1 = __importDefault(require("./database/connect"));
+const errorHandler_1 = require("./utils/errors/errorHandler");
+const userRoute_1 = __importDefault(require("./routes/userRoute"));
 dotenv.config();
 class App {
     constructor() {
@@ -42,7 +44,9 @@ class App {
         this.connectDB(this.url);
         this.openServer();
         //세팅 라우트
+        this.configureRouter();
         //세팅 에러핸들러
+        this.configureErrorHandling();
     }
     configureMiddleware() {
         this.app.use(express_1.default.json());
@@ -53,8 +57,12 @@ class App {
             console.log(`Server is running on port ${this.port}`);
         });
     }
-    configureRouter() { }
-    configureErrorHandling() { }
+    configureRouter() {
+        this.app.use("/api/v2/user", userRoute_1.default);
+    }
+    configureErrorHandling() {
+        this.app.use(errorHandler_1.errorHandler);
+    }
     connectDB(url) {
         (0, connect_1.default)(url);
     }

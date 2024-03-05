@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv'
 
 import connect from './database/connect' 
 import { errorHandler } from './utils/errors/errorHandler'
+import userRoute from './routes/userRoute'
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ class App {
 
     
     //세팅 라우트
+    this.configureRouter();
     //세팅 에러핸들러
     this.configureErrorHandling();
   }
@@ -40,7 +42,9 @@ class App {
     });
   }
 
-  private configureRouter() {}
+  private configureRouter() {
+    this.app.use("/api/v2/user", userRoute);
+  }
 
   private configureErrorHandling() {
     this.app.use(errorHandler);

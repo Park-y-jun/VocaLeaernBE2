@@ -7,6 +7,7 @@ export interface User {
   createdAt?: Date;
   updatedAt?: Date;
   accessToken?: string;
+  lists?: Types.ObjectId[];  
 }
 
 const schema = new Schema<User>(
@@ -19,8 +20,14 @@ const schema = new Schema<User>(
     password: {
       type: Schema.Types.String,
     },
+    lists: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "List",
+      },
+    ],
   },
   { timestamps: true }
 );
 
-export const UserModel = mongoose.model<User>('User', schema);
+export const UserModel = mongoose.model<User>("User", schema);

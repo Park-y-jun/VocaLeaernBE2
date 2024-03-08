@@ -1,27 +1,32 @@
 import mongoose, { model, Schema, Types } from "mongoose";
 
-interface List {
-  _id: Types.ObjectId;
+export interface List {
+  _id?: Types.ObjectId;
+  user: Types.ObjectId; 
   listName: string;
-  userName: string;
   createdAt?: Date;
   updatedAt?: Date;
+  words?: Types.ObjectId[]; 
 }
 
 const schema = new Schema<List>(
   {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User", // Reference to User model
+    },
     listName: {
       type: Schema.Types.String,
       maxlength: 100,
-      unique: true,
     },
-    userName: {
-      type: Schema.Types.String,
-      maxlength: 50,
-      unique: true,
-    },
+    words: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Word", 
+      },
+    ],
   },
   { timestamps: true }
 );
 
-export default mongoose.model<List>("List", schema);
+export const ListModel = mongoose.model<List>("List", schema);

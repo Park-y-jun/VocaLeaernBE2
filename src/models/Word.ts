@@ -8,8 +8,8 @@ enum Difficulty {
 }
 
 interface Word {
-  _id: Types.ObjectId;
-  listName: string;
+  _id?: Types.ObjectId;
+  list: Types.ObjectId; 
   question: string;
   answer: string;
   difficulty: Difficulty;
@@ -20,10 +20,9 @@ interface Word {
 
 const schema = new Schema<Word>(
   {
-    listName: {
-      type: Schema.Types.String,
-      maxlength: 100,
-      unique: true,
+    list: {
+      type: Schema.Types.ObjectId,
+      ref: "List", 
     },
     question: {
       type: Schema.Types.String,

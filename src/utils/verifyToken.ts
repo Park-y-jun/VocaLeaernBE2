@@ -1,19 +1,12 @@
-import { RequestHandler, Request, NextFunction } from "express";
+import { RequestHandler, Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { BadRequest, Unauthorized, Forbidden, NotFound } from "../utils/errors/error";
 
 interface UserPayload {
-  key :string;
+  key: string;
 }
 
-interface AuthRequest extends Request {
-  user: UserPayload;
-}
-
-type AuthRequestHandler = (req: AuthRequest, res: Response, next: NextFunction) => void | Promise<void>;
-
-
-export const verifyToken: AuthRequestHandler = async (req, res, next) => {
+export const verifyToken: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
   try {
     const { authorization } = req.headers;
 
@@ -32,7 +25,7 @@ export const verifyToken: AuthRequestHandler = async (req, res, next) => {
     if (typeof decoded === "string") {
       next(new Unauthorized("Invalid token format"));
     } else {
-      req.user = decoded as UserPayload;
+      (req as any).user = decoded as UserPayload;
     }
 
     next();
@@ -44,3 +37,4 @@ export const verifyToken: AuthRequestHandler = async (req, res, next) => {
     }
   }
 };
+

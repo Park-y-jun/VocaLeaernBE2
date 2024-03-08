@@ -5,6 +5,8 @@ import * as dotenv from 'dotenv'
 import connect from './database/connect' 
 import { errorHandler } from './utils/errors/errorHandler'
 import userRoute from './routes/userRoute'
+import listRoute from "./routes/listRoute";
+import {verifyToken} from './utils/verifyToken'
 
 dotenv.config();
 
@@ -44,6 +46,8 @@ class App {
 
   private configureRouter() {
     this.app.use("/api/v2/user", userRoute);
+    this.app.use("*", verifyToken);
+    this.app.use("/api/v2/list", listRoute);
   }
 
   private configureErrorHandling() {

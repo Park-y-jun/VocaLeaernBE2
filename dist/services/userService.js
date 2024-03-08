@@ -24,7 +24,7 @@ class userService {
                 const salt = yield bcrypt_1.default.genSalt(saltRounds);
                 const hashedPassword = yield bcrypt_1.default.hash(user.password, salt);
                 const newUser = Object.assign(Object.assign({}, user), { password: hashedPassword });
-                return yield userRepository_1.default.createUser(newUser);
+                yield userRepository_1.default.createUser(newUser);
             }
             catch (err) {
                 throw err;
@@ -58,3 +58,4 @@ class userService {
     }
 }
 exports.default = new userService();
+//# sourceMappingURL=userService.js.map

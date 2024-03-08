@@ -9,24 +9,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const List_1 = require("../../models/List");
 const User_1 = require("../../models/User");
-class UserRepository {
-    createUser(user) {
+class ListRepository {
+    createList(list) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            const newUser = new User_1.UserModel({
-                userName: user.userName,
-                password: user.password,
-                lists: [],
-            });
-            yield newUser.save();
+            const newList = new List_1.ListModel({ listName: list.listName, userName: list.user });
+            yield newList.save();
+            const user = yield User_1.UserModel.findById(list.user);
+            if (user) {
+                (_a = user.lists) === null || _a === void 0 ? void 0 : _a.push(newList._id);
+                yield user.save();
+            }
         });
     }
-    findUserByUserName(userName) {
+    findOneAndPopulate(userName) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield User_1.UserModel.findOne({ userName });
-            return user;
+            return yield User_1.UserModel.findOne({ _id: userName }).populate("lists");
         });
     }
 }
-exports.default = new UserRepository();
-//# sourceMappingURL=userRepository.js.map
+exports.default = new ListRepository();
+//# sourceMappingURL=listRepository.js.map

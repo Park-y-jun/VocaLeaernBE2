@@ -32,10 +32,9 @@ var Difficulty;
     Difficulty["HARD"] = "HARD";
 })(Difficulty || (Difficulty = {}));
 const schema = new mongoose_1.Schema({
-    listName: {
-        type: mongoose_1.Schema.Types.String,
-        maxlength: 100,
-        unique: true,
+    list: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "List",
     },
     question: {
         type: mongoose_1.Schema.Types.String,
@@ -53,3 +52,4 @@ const schema = new mongoose_1.Schema({
     },
 }, { timestamps: true });
 exports.default = mongoose_1.default.model("Word", schema);
+//# sourceMappingURL=Word.js.map

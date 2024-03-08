@@ -5,9 +5,10 @@ class UserRepository {
     const newUser = new UserModel({
       userName: user.userName,
       password: user.password,
+      lists: [],
     });
 
-    return await newUser.save();
+    await newUser.save();
   }
 
   async findUserByUserName(userName: string) {

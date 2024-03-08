@@ -5,9 +5,9 @@ import userService from "../services/userService";
 export const signUp: RequestHandler = async (req, res, next) => {
   try {
   const {id, password} = req.body
-  const newUser = await userService.createUser({ userName: id, password });
+  await userService.createUser({ userName: id, password});
 
-  res.status(201).json(newUser);
+  res.status(201).json({ message: "Sign-up was successful." });
   } catch(error) {
     next(error)
   }

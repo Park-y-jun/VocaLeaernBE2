@@ -12,29 +12,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signIn = exports.signUp = void 0;
-const userService_1 = __importDefault(require("../services/userService"));
-const signUp = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.findAllListsByUser = exports.newList = void 0;
+const listService_1 = __importDefault(require("../services/listService"));
+const newList = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id, password } = req.body;
-        yield userService_1.default.createUser({ userName: id, password });
-        res.status(201).json({ message: "Sign-up was successful." });
+        const { listName, user } = req.body;
+        yield listService_1.default.newList({ listName, user });
+        res.status(201).json({ message: "Create list was successful." });
     }
     catch (error) {
         next(error);
     }
 });
-exports.signUp = signUp;
-const signIn = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.newList = newList;
+const findAllListsByUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id, password } = req.body;
-        yield userService_1.default.confirmUser({ userName: id, password });
-        const loggedInUser = yield userService_1.default.accessToken({ userName: id, password });
-        res.status(201).json({ data: loggedInUser });
+        const userName = req.params.id;
+        const lists = yield listService_1.default.findAllListsByUser(userName);
+        res.status(201).json({ data: lists });
     }
     catch (error) {
         next(error);
     }
 });
-exports.signIn = signIn;
-//# sourceMappingURL=userController.js.map
+exports.findAllListsByUser = findAllListsByUser;
+//# sourceMappingURL=listController.js.map

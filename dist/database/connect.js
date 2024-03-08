@@ -19,3 +19,4 @@ exports.default = (url) => {
     connect();
     mongoose_1.default.connection.on("disconnected", connect);
 };
+//# sourceMappingURL=connect.js.map

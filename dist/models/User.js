@@ -34,5 +34,12 @@ const schema = new mongoose_1.Schema({
     password: {
         type: mongoose_1.Schema.Types.String,
     },
+    lists: [
+        {
+            type: mongoose_1.Schema.Types.ObjectId,
+            ref: "List",
+        },
+    ],
 }, { timestamps: true });
-exports.UserModel = mongoose_1.default.model('User', schema);
+exports.UserModel = mongoose_1.default.model("User", schema);
+//# sourceMappingURL=User.js.map

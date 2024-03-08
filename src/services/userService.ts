@@ -17,7 +17,7 @@ class userService {
         password: hashedPassword,
       };
 
-      return await userRepository.createUser(newUser);
+      await userRepository.createUser(newUser);
     } catch (err) {
       throw err;
     }

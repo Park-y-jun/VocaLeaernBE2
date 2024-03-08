@@ -45,3 +45,4 @@ class NotFound extends HttpError {
     }
 }
 exports.NotFound = NotFound;
+//# sourceMappingURL=error.js.map

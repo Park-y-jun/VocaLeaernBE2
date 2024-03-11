@@ -1,6 +1,7 @@
 import {User, UserModel} from '../../models/User'
 
 class UserRepository {
+  
   async createUser(user: User) {
     const newUser = new UserModel({
       userName: user.userName,

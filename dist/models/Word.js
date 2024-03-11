@@ -23,6 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.WordModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 var Difficulty;
 (function (Difficulty) {
@@ -51,5 +52,5 @@ const schema = new mongoose_1.Schema({
         type: mongoose_1.Schema.Types.Date,
     },
 }, { timestamps: true });
-exports.default = mongoose_1.default.model("Word", schema);
+exports.WordModel = mongoose_1.default.model("Word", schema);
 //# sourceMappingURL=Word.js.map

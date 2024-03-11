@@ -33,6 +33,7 @@ const connect_1 = __importDefault(require("./database/connect"));
 const errorHandler_1 = require("./utils/errors/errorHandler");
 const userRoute_1 = __importDefault(require("./routes/userRoute"));
 const listRoute_1 = __importDefault(require("./routes/listRoute"));
+const wordRoute_1 = __importDefault(require("./routes/wordRoute"));
 const verifyToken_1 = require("./utils/verifyToken");
 dotenv.config();
 class App {
@@ -63,6 +64,7 @@ class App {
         this.app.use("/api/v2/user", userRoute_1.default);
         this.app.use("*", verifyToken_1.verifyToken);
         this.app.use("/api/v2/list", listRoute_1.default);
+        this.app.use("/api/v2/word", wordRoute_1.default);
     }
     configureErrorHandling() {
         this.app.use(errorHandler_1.errorHandler);

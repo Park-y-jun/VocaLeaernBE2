@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt'
 import jwt, { Algorithm } from "jsonwebtoken";
 
 class userService {
+
   async createUser(user: User) {
     try {
       const saltRounds = 10;

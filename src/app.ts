@@ -6,6 +6,7 @@ import connect from './database/connect'
 import { errorHandler } from './utils/errors/errorHandler'
 import userRoute from './routes/userRoute'
 import listRoute from "./routes/listRoute";
+import wordRoute from "./routes/wordRoute";
 import {verifyToken} from './utils/verifyToken'
 
 dotenv.config();
@@ -19,17 +20,15 @@ class App {
     this.app = express();
     this.port = process.env.APP_PORT || 3000;
     this.url = process.env.Mongo_DB as string;
-    //config
+    
     this.configureMiddleware();
-    // 서버열기
+  
     this.connectDB(this.url);
 
     this.openServer()
 
-    
-    //세팅 라우트
     this.configureRouter();
-    //세팅 에러핸들러
+ 
     this.configureErrorHandling();
   }
 
@@ -48,6 +47,7 @@ class App {
     this.app.use("/api/v2/user", userRoute);
     this.app.use("*", verifyToken);
     this.app.use("/api/v2/list", listRoute);
+    this.app.use("/api/v2/word", wordRoute);
   }
 
   private configureErrorHandling() {

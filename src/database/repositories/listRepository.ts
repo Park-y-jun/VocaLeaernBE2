@@ -3,6 +3,7 @@ import { UserModel } from '../../models/User';
 import { BadRequest, Unauthorized, Forbidden, NotFound } from "../../utils/errors/error";
 
 class ListRepository {
+  
   async createList(list: List) {
     const newList = new ListModel({ listName: list.listName, userName: list.user });
     await newList.save();

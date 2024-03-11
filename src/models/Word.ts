@@ -7,15 +7,21 @@ enum Difficulty {
   HARD = "HARD",
 }
 
-interface Word {
+export interface Word {
   _id?: Types.ObjectId;
-  list: Types.ObjectId; 
+  list: Types.ObjectId;
   question: string;
   answer: string;
-  difficulty: Difficulty;
-  nextReviewDate: Date;
+  difficulty?: Difficulty;
+  nextReviewDate?: Date;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export interface ModifyDifficultyParams {
+  listID: Types.ObjectId;
+  wordID: Types.ObjectId;
+  difficulty: Difficulty;
 }
 
 const schema = new Schema<Word>(
@@ -42,4 +48,4 @@ const schema = new Schema<Word>(
   { timestamps: true }
 );
 
-export default mongoose.model<Word>("Word", schema);
+export const WordModel = mongoose.model<Word>("Word", schema);

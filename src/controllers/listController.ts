@@ -14,8 +14,8 @@ export const newList: RequestHandler = async (req, res, next) => {
 
 export const findAllListsByUser: RequestHandler = async (req, res, next) => {
   try {
-    const userName = req.params.id;
-    const lists = await listService.findAllListsByUser(userName);
+    const userKey = req.params.id;
+    const lists = await listService.findAllListsByUser(userKey);
     
     res.status(201).json({ data: lists });
   } catch(error) {

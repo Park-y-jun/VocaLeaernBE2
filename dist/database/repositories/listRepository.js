@@ -15,7 +15,7 @@ class ListRepository {
     createList(list) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            const newList = new List_1.ListModel({ listName: list.listName, userName: list.user });
+            const newList = new List_1.ListModel({ listName: list.listName, user: list.user });
             yield newList.save();
             const user = yield User_1.UserModel.findById(list.user);
             if (user) {
@@ -24,9 +24,9 @@ class ListRepository {
             }
         });
     }
-    findOneAndPopulate(userName) {
+    findOneAndPopulate(userKey) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield User_1.UserModel.findOne({ _id: userName }).populate("lists");
+            return yield User_1.UserModel.findOne({ _id: userKey }).populate("lists");
         });
     }
 }

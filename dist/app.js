@@ -29,6 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const dotenv = __importStar(require("dotenv"));
+const cors_1 = __importDefault(require("cors"));
 const connect_1 = __importDefault(require("./database/connect"));
 const errorHandler_1 = require("./utils/errors/errorHandler");
 const userRoute_1 = __importDefault(require("./routes/userRoute"));
@@ -41,19 +42,16 @@ class App {
         this.app = (0, express_1.default)();
         this.port = process.env.APP_PORT || 3000;
         this.url = process.env.Mongo_DB;
-        //config
         this.configureMiddleware();
-        // 서버열기
         this.connectDB(this.url);
         this.openServer();
-        //세팅 라우트
         this.configureRouter();
-        //세팅 에러핸들러
         this.configureErrorHandling();
     }
     configureMiddleware() {
         this.app.use(express_1.default.json());
         this.app.use((0, morgan_1.default)("combined"));
+        this.app.use((0, cors_1.default)({ origin: "http://localhost:5173" }));
     }
     openServer() {
         this.app.listen(this.port, () => {

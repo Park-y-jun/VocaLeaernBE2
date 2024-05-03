@@ -27,8 +27,8 @@ const newList = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
 exports.newList = newList;
 const findAllListsByUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const userName = req.params.id;
-        const lists = yield listService_1.default.findAllListsByUser(userName);
+        const userKey = req.params.id;
+        const lists = yield listService_1.default.findAllListsByUser(userKey);
         res.status(201).json({ data: lists });
     }
     catch (error) {

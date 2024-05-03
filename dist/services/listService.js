@@ -21,16 +21,13 @@ class listService {
                 yield listRepository_1.default.createList(list);
             }
             catch (error) {
-                // if ((error as MongoError).code === 11000) {
-                //   throw new BadRequest("List name must be unique");
-                // }
                 throw error;
             }
         });
     }
-    findAllListsByUser(userName) {
+    findAllListsByUser(userKey) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield listRepository_1.default.findOneAndPopulate(userName);
+            const user = yield listRepository_1.default.findOneAndPopulate(userKey);
             if (!user)
                 throw new error_1.NotFound("User not found");
             return user.lists;

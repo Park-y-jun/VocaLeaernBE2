@@ -2,9 +2,12 @@ import { Word, WordModel, ModifyDifficultyParams } from "../../models/Word";
 import { ListModel } from "../../models/List";
 
 class wordRepository {
-  
   async createWord(word: Word) {
-    const newWord = new WordModel({ list: word.list, question: word.question, answer: word.answer });
+    const newWord = new WordModel({
+      list: word.list,
+      question: word.question,
+      answer: word.answer,
+    });
     await newWord.save();
 
     const list = await ListModel.findById(word.list);
@@ -15,7 +18,14 @@ class wordRepository {
   }
 
   async findOneAndPopulate(listId: string) {
-    return await ListModel.findOne({ _id: listId }).populate("words");
+   const currentDate = new Date();
+   return await ListModel.findOne({ _id: listId }).populate({
+     path: "words",
+     match: {
+       $or: [{ nextReviewDate: { $lte: currentDate } }, { difficulty: "INITIAL" }],
+     },
+     options: { sort: { nextReviewDate: 1 } },
+   });
   }
 
   async modifyDifficulty(params: ModifyDifficultyParams) {

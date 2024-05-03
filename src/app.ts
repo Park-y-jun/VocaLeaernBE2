@@ -1,6 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import * as dotenv from 'dotenv'
+import cors from 'cors'
 
 import connect from './database/connect' 
 import { errorHandler } from './utils/errors/errorHandler'
@@ -35,6 +36,7 @@ class App {
   private configureMiddleware() {
     this.app.use(express.json());
     this.app.use(morgan("combined"));
+    this.app.use(cors({ origin: "http://localhost:5173" }));
   }
 
   private openServer() {

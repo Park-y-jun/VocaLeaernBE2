@@ -15,7 +15,11 @@ class wordRepository {
     createWord(word) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            const newWord = new Word_1.WordModel({ list: word.list, question: word.question, answer: word.answer });
+            const newWord = new Word_1.WordModel({
+                list: word.list,
+                question: word.question,
+                answer: word.answer,
+            });
             yield newWord.save();
             const list = yield List_1.ListModel.findById(word.list);
             if (list) {
@@ -26,7 +30,14 @@ class wordRepository {
     }
     findOneAndPopulate(listId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield List_1.ListModel.findOne({ _id: listId }).populate("words");
+            const currentDate = new Date();
+            return yield List_1.ListModel.findOne({ _id: listId }).populate({
+                path: "words",
+                match: {
+                    $or: [{ nextReviewDate: { $lte: currentDate } }, { difficulty: "INITIAL" }],
+                },
+                options: { sort: { nextReviewDate: 1 } },
+            });
         });
     }
     modifyDifficulty(params) {

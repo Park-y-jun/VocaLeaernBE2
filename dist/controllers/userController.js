@@ -30,7 +30,7 @@ const signIn = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
         const { id, password } = req.body;
         yield userService_1.default.confirmUser({ userName: id, password });
         const loggedInUser = yield userService_1.default.accessToken({ userName: id, password });
-        res.status(201).json({ data: loggedInUser });
+        res.status(200).json({ data: loggedInUser });
     }
     catch (error) {
         next(error);

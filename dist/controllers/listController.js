@@ -29,7 +29,7 @@ const findAllListsByUser = (req, res, next) => __awaiter(void 0, void 0, void 0,
     try {
         const userKey = req.params.id;
         const lists = yield listService_1.default.findAllListsByUser(userKey);
-        res.status(201).json({ data: lists });
+        res.status(200).json({ data: lists });
     }
     catch (error) {
         next(error);

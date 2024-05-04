@@ -19,7 +19,7 @@ export const findAllWordsByList: RequestHandler = async (req, res, next) => {
     const listId = req.params.id;
     const words = await wordService.findAllWordsByList(listId)
 
-    res.status(201).json({ data: words });
+    res.status(200).json({ data: words });
   } catch(error) {
     next(error);
   }

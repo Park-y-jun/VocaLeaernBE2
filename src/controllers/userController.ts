@@ -19,7 +19,7 @@ export const signIn: RequestHandler = async (req, res, next) => {
   await userService.confirmUser({ userName: id, password });
   const loggedInUser = await userService.accessToken({ userName: id, password });
   
-  res.status(201).json({ data: loggedInUser });
+  res.status(200).json({ data: loggedInUser });
   } catch(error) {
     next(error)
   }

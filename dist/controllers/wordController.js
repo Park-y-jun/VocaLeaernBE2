@@ -30,7 +30,7 @@ const findAllWordsByList = (req, res, next) => __awaiter(void 0, void 0, void 0,
     try {
         const listId = req.params.id;
         const words = yield wordService_1.default.findAllWordsByList(listId);
-        res.status(201).json({ data: words });
+        res.status(200).json({ data: words });
     }
     catch (error) {
         next(error);

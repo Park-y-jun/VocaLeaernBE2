@@ -14,7 +14,7 @@ VocaLearner = Vocabulary + Learn + er</br>
 ![VCL 객체](https://github.com/Park-y-jun/VocaLearnerBE2/assets/112556759/2c3b70c1-183f-4ba0-8fb4-127fad1a977a)
 ## API 문서
 🔗 [문서 링크](https://honored-hare-249.notion.site/VocaLeaner-API-c722386c83eb4ea582df6697ea32c012?pvs=4)
-## 실행법
+## 실행조건
 Node.js 버전 : 18.13.0<br>
 npm (Node Package Manager)<br>
 MongoDB Atlas
